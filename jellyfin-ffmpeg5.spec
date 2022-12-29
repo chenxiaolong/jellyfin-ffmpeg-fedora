@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
 %global ffmpeg_version 5.1.2
 # Jellyfin patchset release
-%global patchset_release 4
+%global patchset_release 5
 
 # Follow naming convention of other distros' jellyfin-ffmpeg packages
 Name:           jellyfin-ffmpeg5
@@ -25,6 +25,7 @@ BuildRequires:  vulkan-loader-devel
 BuildRequires:  pkgconfig(dav1d)
 BuildRequires:  pkgconfig(ffnvcodec)
 BuildRequires:  pkgconfig(fontconfig)
+BuildRequires:  pkgconfig(fdk-aac)
 BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(fribidi)
 BuildRequires:  pkgconfig(gnutls)
@@ -41,6 +42,7 @@ BuildRequires:  pkgconfig(libwebp)
 BuildRequires:  pkgconfig(OpenCL)
 BuildRequires:  pkgconfig(opus)
 BuildRequires:  pkgconfig(shaderc)
+BuildRequires:  pkgconfig(SvtAv1Enc)
 BuildRequires:  pkgconfig(theora)
 BuildRequires:  pkgconfig(vorbis)
 BuildRequires:  pkgconfig(vpx)
@@ -120,7 +122,9 @@ cat debian/patches/*.patch | patch -p1
     --enable-cuda-llvm \
     --enable-cuvid \
     --enable-nvdec \
-    --enable-nvenc
+    --enable-nvenc \
+    --enable-libfdk-aac \
+    --enable-libsvtav1
 
 %make_build
 
@@ -140,5 +144,10 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Wed Dec 28 2022 Andrew Gunnerson <accounts+fedora@chiller3.com> - 5.1.2-5.1
+- Update to patchset release 5
+- Add --enable-libfdk-aac
+- Add --enable-libsvtav1
+
 * Mon Nov 07 2022 Andrew Gunnerson <accounts+fedora@chiller3.com> - 5.1.2-4.1
 - Initial release
