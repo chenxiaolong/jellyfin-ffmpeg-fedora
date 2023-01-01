@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
 %global ffmpeg_version 5.1.2
 # Jellyfin patchset release
-%global patchset_release 5
+%global patchset_release 6
 
 # Follow naming convention of other distros' jellyfin-ffmpeg packages
 Name:           jellyfin-ffmpeg5
@@ -144,6 +144,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Sun Jan 01 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 5.1.2-6.1
+- Update to patchset release 6
+
 * Wed Dec 28 2022 Andrew Gunnerson <accounts+fedora@chiller3.com> - 5.1.2-5.1
 - Update to patchset release 5
 - Add --enable-libfdk-aac
