@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
 %global ffmpeg_version 5.1.2
 # Jellyfin patchset release
-%global patchset_release 6
+%global patchset_release 7
 
 # Follow naming convention of other distros' jellyfin-ffmpeg packages
 Name:           jellyfin-ffmpeg5
@@ -144,6 +144,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Sat Jan 28 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 5.1.2-7.1
+- Update to patchset release 7
+
 * Sun Jan 01 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 5.1.2-6.1
 - Update to patchset release 6
 
