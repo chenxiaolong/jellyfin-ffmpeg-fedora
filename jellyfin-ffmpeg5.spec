@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
-%global ffmpeg_version 5.1.2
+%global ffmpeg_version 5.1.3
 # Jellyfin patchset release
-%global patchset_release 9
+%global patchset_release 1
 
 # Follow naming convention of other distros' jellyfin-ffmpeg packages
 Name:           jellyfin-ffmpeg5
@@ -34,6 +34,7 @@ BuildRequires:  pkgconfig(libbluray)
 BuildRequires:  pkgconfig(libchromaprint)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libmfx)
+BuildRequires:  pkgconfig(libopenmpt)
 BuildRequires:  pkgconfig(libplacebo)
 BuildRequires:  pkgconfig(libva)
 BuildRequires:  pkgconfig(libva-drm)
@@ -100,6 +101,7 @@ cat debian/patches/*.patch | patch -p1
     --enable-libfreetype \
     --enable-libfribidi \
     --enable-libmp3lame \
+    --enable-libopenmpt \
     --enable-libopus \
     --enable-libtheora \
     --enable-libvorbis \
@@ -144,6 +146,10 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Tue Apr 18 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 5.1.3-1.1
+- Update to 5.1.3 and patchset release 1
+- Enable openmpt support
+
 * Sat Mar 25 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 5.1.2-9.1
 - Update to patchset release 9
 
