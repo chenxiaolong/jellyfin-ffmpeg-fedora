@@ -1,17 +1,16 @@
 # Upstream ffmpeg version
-%global ffmpeg_version 5.1.3
+%global ffmpeg_version 6.0
 # Jellyfin patchset release
-%global patchset_release 1
+%global patchset_release 2
 
-# Follow naming convention of other distros' jellyfin-ffmpeg packages
-Name:           jellyfin-ffmpeg5
+Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
 Release:        %{patchset_release}.1%{?dist}
 Summary:        Custom ffmpeg build with Jellyfin patchset
 
 License:        LGPLv2+ and GPLv3+
-URL:            https://github.com/jellyfin/jellyfin-ffmpeg
-Source0:        https://github.com/jellyfin/jellyfin-ffmpeg/archive/refs/tags/v%{version}-%{patchset_release}.tar.gz
+URL:            https://github.com/jellyfin/%{name}
+Source0:        https://github.com/jellyfin/%{name}/archive/refs/tags/v%{version}-%{patchset_release}.tar.gz
 
 ExclusiveArch:  x86_64
 
@@ -33,7 +32,6 @@ BuildRequires:  pkgconfig(libass)
 BuildRequires:  pkgconfig(libbluray)
 BuildRequires:  pkgconfig(libchromaprint)
 BuildRequires:  pkgconfig(libdrm)
-BuildRequires:  pkgconfig(libmfx)
 BuildRequires:  pkgconfig(libopenmpt)
 BuildRequires:  pkgconfig(libplacebo)
 BuildRequires:  pkgconfig(libva)
@@ -46,12 +44,16 @@ BuildRequires:  pkgconfig(shaderc)
 BuildRequires:  pkgconfig(SvtAv1Enc)
 BuildRequires:  pkgconfig(theora)
 BuildRequires:  pkgconfig(vorbis)
+BuildRequires:  pkgconfig(vpl)
 BuildRequires:  pkgconfig(vpx)
 BuildRequires:  pkgconfig(x264)
 BuildRequires:  pkgconfig(x265)
 BuildRequires:  pkgconfig(zimg)
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  pkgconfig(zvbi-0.2)
+
+Obsoletes:      jellyfin-ffmpeg5
+Conflicts:      jellyfin < 10.8.10
 
 %description
 FFmpeg is a leading multimedia framework, able to decode, encode, transcode,
@@ -64,7 +66,7 @@ This build contains binaries built with the jellyfin-ffmpeg patchset.
 
 
 %prep
-%autosetup -n jellyfin-ffmpeg-%{version}-%{patchset_release}
+%autosetup -n %{name}-%{version}-%{patchset_release}
 
 cat debian/patches/*.patch | patch -p1
 
@@ -75,7 +77,7 @@ cat debian/patches/*.patch | patch -p1
     --optflags="%{build_cflags}" \
     --extra-ldflags="%{build_ldflags}" \
     --prefix=/discard \
-    --bindir=%{_libexecdir}/jellyfin-ffmpeg \
+    --bindir=%{_libexecdir}/%{name} \
     --target-os=linux \
     --extra-version=Jellyfin \
     --disable-doc \
@@ -118,7 +120,7 @@ cat debian/patches/*.patch | patch -p1
     --enable-opencl \
     --enable-vaapi \
     --enable-amf \
-    --enable-libmfx \
+    --enable-libvpl \
     --enable-ffnvcodec \
     --enable-cuda \
     --enable-cuda-llvm \
@@ -140,12 +142,17 @@ rm -r %{buildroot}/discard
 
 %files
 %license COPYING.GPLv2 COPYING.GPLv3 COPYING.LGPLv2.1 COPYING.LGPLv3
-%dir %{_libexecdir}/jellyfin-ffmpeg
-%{_libexecdir}/jellyfin-ffmpeg/ffmpeg
-%{_libexecdir}/jellyfin-ffmpeg/ffprobe
+%dir %{_libexecdir}/%{name}
+%{_libexecdir}/%{name}/ffmpeg
+%{_libexecdir}/%{name}/ffprobe
 
 
 %changelog
+* Wed May 03 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0-2.1
+- Update to 6.0 and patchset release 2
+- Rename package to just jellyfin-ffmpeg
+- Use oneVPL instead of libmfx
+
 * Tue Apr 18 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 5.1.3-1.1
 - Update to 5.1.3 and patchset release 1
 - Enable openmpt support
