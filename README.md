@@ -6,7 +6,7 @@ I unfortunately don't personally have the bandwidth to implement and maintain ev
 
 ## Building from source
 
-The [`jellyfin-ffmpeg5.spec`](./jellyfin-ffmpeg5.spec) file can be built like any ordinary RPM spec. To build it inside a `mock` container:
+The [`jellyfin-ffmpeg.spec`](./jellyfin-ffmpeg.spec) file can be built like any ordinary RPM spec. To build it inside a `mock` container:
 
 1. Install mock and the config files for including the rpmfusion-free repos.
 
@@ -23,7 +23,7 @@ The [`jellyfin-ffmpeg5.spec`](./jellyfin-ffmpeg5.spec) file can be built like an
 3. Download the sources.
 
     ```bash
-    spectool -g jellyfin-ffmpeg5.spec
+    spectool -g jellyfin-ffmpeg.spec
     ```
 
 4. Build an SRPM from the spec file and the sources.
@@ -35,7 +35,7 @@ The [`jellyfin-ffmpeg5.spec`](./jellyfin-ffmpeg5.spec) file can be built like an
         --resultdir results-srpm \
         --buildsrpm \
         --sources . \
-        --spec jellyfin-ffmpeg5.spec
+        --spec jellyfin-ffmpeg.spec
     ```
 
 5. Build RPMs from the SRPM.
