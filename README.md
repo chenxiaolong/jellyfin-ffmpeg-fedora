@@ -11,7 +11,7 @@ The [`jellyfin-ffmpeg.spec`](./jellyfin-ffmpeg.spec) file can be built like any 
 1. Install mock and the config files for including the rpmfusion-free repos.
 
     ```bash
-    sudo dnf install mock mock-rpmfusion-free
+    sudo dnf install rpmdevtools mock mock-rpmfusion-free
     ```
 
 2. Ensure the current user is in the `mock` group.
