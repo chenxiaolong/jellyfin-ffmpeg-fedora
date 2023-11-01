@@ -8,25 +8,27 @@ I unfortunately don't personally have the bandwidth to implement and maintain ev
 
 The [`jellyfin-ffmpeg.spec`](./jellyfin-ffmpeg.spec) file can be built like any ordinary RPM spec. To build it inside a `mock` container:
 
-1. Install mock and the config files for including the rpmfusion-free repos.
+1. Make sure the [RPMFusion repos are enabled](https://rpmfusion.org/Configuration). The steps enable both the `free` and `nonfree` repos by default, but jellyfin-ffmpeg only requires `free`.
+
+2. Install mock and the config files for including the rpmfusion-free repos.
 
     ```bash
     sudo dnf install rpmdevtools mock mock-rpmfusion-free
     ```
 
-2. Ensure the current user is in the `mock` group.
+3. Ensure the current user is in the `mock` group.
 
     ```bash
     sudo gpasswd -a "${USER}" mock
     ```
 
-3. Download the sources.
+4. Download the sources.
 
     ```bash
     spectool -g jellyfin-ffmpeg.spec
     ```
 
-4. Build an SRPM from the spec file and the sources.
+5. Build an SRPM from the spec file and the sources.
 
     ```bash
     fedora_ver=$(source /etc/os-release && echo "${VERSION_ID}")
@@ -38,7 +40,7 @@ The [`jellyfin-ffmpeg.spec`](./jellyfin-ffmpeg.spec) file can be built like any 
         --spec jellyfin-ffmpeg.spec
     ```
 
-5. Build RPMs from the SRPM.
+6. Build RPMs from the SRPM.
 
     ```bash
     mock \
