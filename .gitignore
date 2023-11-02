@@ -1,3 +1,4 @@
 *.tar.gz
+*.patch
 results-rpm/
 results-srpm/
