@@ -1,11 +1,11 @@
 # Upstream ffmpeg version
 %global ffmpeg_version 6.0
 # Jellyfin patchset release
-%global patchset_release 7
+%global patchset_release 8
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
-Release:        %{patchset_release}.2%{?dist}
+Release:        %{patchset_release}.1%{?dist}
 Summary:        Custom ffmpeg build with Jellyfin patchset
 
 License:        LGPLv2+ and GPLv3+
@@ -152,7 +152,10 @@ rm -r %{buildroot}/discard
 
 
 %changelog
-* Thu Nov 02 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0-8.1
+* Sat Nov 04 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0-8.1
+- Update to patchset release 8
+
+* Thu Nov 02 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0-7.2
 - Add upstream patches for Nvidia SDK 12.1 compatibility (GH#1)
 
 * Tue Oct 17 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0-7.1
