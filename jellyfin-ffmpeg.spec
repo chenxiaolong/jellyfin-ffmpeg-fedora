@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
-%global ffmpeg_version 6.0
+%global ffmpeg_version 6.0.1
 # Jellyfin patchset release
-%global patchset_release 8
+%global patchset_release 1
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
@@ -11,10 +11,6 @@ Summary:        Custom ffmpeg build with Jellyfin patchset
 License:        LGPLv2+ and GPLv3+
 URL:            https://github.com/jellyfin/%{name}
 Source0:        https://github.com/jellyfin/%{name}/archive/refs/tags/v%{version}-%{patchset_release}.tar.gz
-
-# Upstream patches for compatibility with Nvidia SDK 12.1
-Patch0:         https://github.com/FFmpeg/FFmpeg/commit/d2b46c1ef768bc31ba9180f6d469d5b8be677500.patch
-Patch1:         https://github.com/FFmpeg/FFmpeg/commit/03823ac0c6a38bd6ba972539e3203a592579792f.patch
 
 ExclusiveArch:  x86_64
 
@@ -152,6 +148,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Mon Nov 27 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0.1-1.1
+- Update to 6.0.1 and patchset release 1
+
 * Sat Nov 04 2023 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0-8.1
 - Update to patchset release 8
 
