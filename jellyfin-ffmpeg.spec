@@ -5,7 +5,7 @@
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
-Release:        %{patchset_release}.1%{?dist}
+Release:        %{patchset_release}.2%{?dist}
 Summary:        Custom ffmpeg build with Jellyfin patchset
 
 License:        LGPLv2+ and GPLv3+
@@ -74,7 +74,7 @@ cat debian/patches/*.patch | patch -p1
 %build
 ./configure \
     --arch=%{_target_cpu} \
-    --optflags="%{build_cflags}" \
+    --optflags="%{build_cflags} -Wno-error=int-conversion" \
     --extra-ldflags="%{build_ldflags}" \
     --prefix=/discard \
     --bindir=%{_libexecdir}/%{name} \
@@ -148,6 +148,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Tue Apr 23 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0.1-5.2
+- Change -Wint-conversion from error to warning to fix build on Fedora 40
+
 * Sun Mar 24 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0.1-5.1
 - Update to patchset release 5
 
