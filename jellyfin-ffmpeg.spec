@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
 %global ffmpeg_version 6.0.1
 # Jellyfin patchset release
-%global patchset_release 6
+%global patchset_release 7
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
@@ -74,7 +74,7 @@ cat debian/patches/*.patch | patch -p1
 %build
 ./configure \
     --arch=%{_target_cpu} \
-    --optflags="%{build_cflags} -Wno-error=int-conversion" \
+    --optflags="%{build_cflags}" \
     --extra-ldflags="%{build_ldflags}" \
     --prefix=/discard \
     --bindir=%{_libexecdir}/%{name} \
@@ -148,6 +148,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Sat May 25 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0.1-7.1
+- Update to patchset release 7
+
 * Thu Apr 25 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0.1-6.1
 - Update to patchset release 6
 
