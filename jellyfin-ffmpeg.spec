@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
 %global ffmpeg_version 6.0.1
 # Jellyfin patchset release
-%global patchset_release 7
+%global patchset_release 8
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
@@ -34,6 +34,7 @@ BuildRequires:  pkgconfig(libchromaprint)
 BuildRequires:  pkgconfig(libdrm)
 BuildRequires:  pkgconfig(libopenmpt)
 BuildRequires:  pkgconfig(libplacebo)
+BuildRequires:  pkgconfig(libxml-2.0)
 BuildRequires:  pkgconfig(libva)
 BuildRequires:  pkgconfig(libva-drm)
 BuildRequires:  pkgconfig(libva-x11)
@@ -112,6 +113,7 @@ cat debian/patches/*.patch | patch -p1
     --enable-libvpx \
     --enable-libx264 \
     --enable-libx265 \
+    --enable-libxml2 \
     --enable-libzvbi \
     --enable-libzimg \
     --enable-libshaderc \
@@ -148,6 +150,10 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Thu Jul 25 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0.1-8.1
+- Update to patchset release 8
+- Build with libxml2 support
+
 * Sat May 25 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0.1-7.1
 - Update to patchset release 7
 
