@@ -2,6 +2,8 @@
 
 This repo contains the packaging files needed to create RPM packages of [jellyfin-ffmpeg](https://github.com/jellyfin/jellyfin-ffmpeg) for Fedora.
 
+NOTE: The `master` branch is currently following version 6. For version 7, see the `v7` branch. The `v7` branch will not be merged until a compatible version of Jellyfin (>= 10.10.0) is released and is available in the RPMFusion repos.
+
 I unfortunately don't personally have the bandwidth to implement and maintain everything the other upstream packages have for other distros (eg. arm64 support). If anyone else is interested in contributing these scripts upstream though, please feel free to do so.
 
 ## Building from source
