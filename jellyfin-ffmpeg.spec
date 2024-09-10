@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
-%global ffmpeg_version 6.0.1
+%global ffmpeg_version 7.0.2
 # Jellyfin patchset release
-%global patchset_release 8
+%global patchset_release 1
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
@@ -28,6 +28,7 @@ BuildRequires:  pkgconfig(fdk-aac)
 BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(fribidi)
 BuildRequires:  pkgconfig(gnutls)
+BuildRequires:  pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(libass)
 BuildRequires:  pkgconfig(libbluray)
 BuildRequires:  pkgconfig(libchromaprint)
@@ -98,6 +99,7 @@ cat debian/patches/*.patch | patch -p1
     --enable-gnutls \
     --enable-chromaprint \
     --enable-libfontconfig \
+    --enable-libharfbuzz \
     --enable-libass \
     --enable-libbluray \
     --enable-libdrm \
@@ -150,6 +152,10 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Mon Sep 09 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-1.1
+* Update to 7.0.2 and patchset release 1
+- Build with harfbuzz support
+
 * Thu Jul 25 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0.1-8.1
 - Update to patchset release 8
 - Build with libxml2 support
