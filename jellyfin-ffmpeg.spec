@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
 %global ffmpeg_version 7.0.2
 # Jellyfin patchset release
-%global patchset_release 1
+%global patchset_release 2
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
@@ -152,6 +152,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Fri Sep 20 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-2.1
+- Update to patchset release 2
+
 * Mon Sep 09 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-1.1
 * Update to 7.0.2 and patchset release 1
 - Build with harfbuzz support
