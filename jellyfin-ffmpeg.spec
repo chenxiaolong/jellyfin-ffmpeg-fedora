@@ -5,7 +5,7 @@
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
-Release:        %{patchset_release}.1%{?dist}
+Release:        %{patchset_release}.2%{?dist}
 Summary:        Custom ffmpeg build with Jellyfin patchset
 
 License:        LGPLv2+ and GPLv3+
@@ -55,7 +55,7 @@ BuildRequires:  pkgconfig(zlib)
 BuildRequires:  pkgconfig(zvbi-0.2)
 
 Obsoletes:      jellyfin-ffmpeg5
-Conflicts:      jellyfin < 10.8.10
+Conflicts:      jellyfin < 10.10.0
 
 %description
 FFmpeg is a leading multimedia framework, able to decode, encode, transcode,
@@ -152,6 +152,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Mon Oct 28 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-5.2
+- Update conflicts for jellyfin < 10.10.0
+
 * Fri Oct 25 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-5.1
 - Update to patchset release 5
 
