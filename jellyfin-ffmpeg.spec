@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
-%global ffmpeg_version 6.0.1
+%global ffmpeg_version 7.0.2
 # Jellyfin patchset release
-%global patchset_release 8
+%global patchset_release 6
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
@@ -28,6 +28,7 @@ BuildRequires:  pkgconfig(fdk-aac)
 BuildRequires:  pkgconfig(freetype2)
 BuildRequires:  pkgconfig(fribidi)
 BuildRequires:  pkgconfig(gnutls)
+BuildRequires:  pkgconfig(harfbuzz)
 BuildRequires:  pkgconfig(libass)
 BuildRequires:  pkgconfig(libbluray)
 BuildRequires:  pkgconfig(libchromaprint)
@@ -54,7 +55,7 @@ BuildRequires:  pkgconfig(zlib)
 BuildRequires:  pkgconfig(zvbi-0.2)
 
 Obsoletes:      jellyfin-ffmpeg5
-Conflicts:      jellyfin < 10.8.10
+Conflicts:      jellyfin < 10.10.0
 
 %description
 FFmpeg is a leading multimedia framework, able to decode, encode, transcode,
@@ -98,6 +99,7 @@ cat debian/patches/*.patch | patch -p1
     --enable-gnutls \
     --enable-chromaprint \
     --enable-libfontconfig \
+    --enable-libharfbuzz \
     --enable-libass \
     --enable-libbluray \
     --enable-libdrm \
@@ -150,6 +152,28 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Mon Nov 11 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-6.1
+- Update to patchset release 6
+
+* Mon Oct 28 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-5.2
+- Update conflicts for jellyfin < 10.10.0
+
+* Fri Oct 25 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-5.1
+- Update to patchset release 5
+
+* Sun Oct 20 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-4.1
+- Update to patchset release 4
+
+* Sun Sep 29 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-3.1
+- Update to patchset release 3
+
+* Fri Sep 20 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-2.1
+- Update to patchset release 2
+
+* Mon Sep 09 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-1.1
+* Update to 7.0.2 and patchset release 1
+- Build with harfbuzz support
+
 * Thu Jul 25 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 6.0.1-8.1
 - Update to patchset release 8
 - Build with libxml2 support
