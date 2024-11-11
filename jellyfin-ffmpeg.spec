@@ -1,11 +1,11 @@
 # Upstream ffmpeg version
 %global ffmpeg_version 7.0.2
 # Jellyfin patchset release
-%global patchset_release 5
+%global patchset_release 6
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
-Release:        %{patchset_release}.2%{?dist}
+Release:        %{patchset_release}.1%{?dist}
 Summary:        Custom ffmpeg build with Jellyfin patchset
 
 License:        LGPLv2+ and GPLv3+
@@ -152,6 +152,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Mon Nov 11 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-6.1
+- Update to patchset release 6
+
 * Mon Oct 28 2024 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-5.2
 - Update conflicts for jellyfin < 10.10.0
 
