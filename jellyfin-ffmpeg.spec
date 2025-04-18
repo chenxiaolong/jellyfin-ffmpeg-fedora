@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
-%global ffmpeg_version 7.0.2
+%global ffmpeg_version 7.1.1
 # Jellyfin patchset release
-%global patchset_release 9
+%global patchset_release 1
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
@@ -84,7 +84,6 @@ cat debian/patches/*.patch | patch -p1
     --extra-version=Jellyfin \
     --disable-doc \
     --disable-ffplay \
-    --disable-ptx-compression \
     --disable-stripping \
     --disable-shared \
     --disable-libxcb \
@@ -152,6 +151,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Fri Apr 18 2025 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.1.1-1.1
+- Update to 7.1.1 and patchset release 1
+
 * Tue Jan 21 2025 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.0.2-9.1
 - Update to patchset release 9
 
