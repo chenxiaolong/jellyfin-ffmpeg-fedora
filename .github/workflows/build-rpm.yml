@@ -1,0 +1,73 @@
+name: Build and Release RPM
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-rpm:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        fedora_version: [42, 43]
+
+    container:
+      image: fedora:${{ matrix.fedora_version }}
+      options: --privileged
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${{ matrix.fedora_version }}.noarch.rpm
+          dnf install -y gh mock mock-rpmfusion-free rpmdevtools
+
+      - name: Configure mock for container environment
+        run: |
+          echo "config_opts['rpmbuild_networking'] = True" >> /etc/mock/site-defaults.cfg
+          echo "config_opts['use_bootstrap'] = False" >> /etc/mock/site-defaults.cfg
+          echo "config_opts['use_nspawn'] = False" >> /etc/mock/site-defaults.cfg
+
+      - name: Download sources
+        run: |
+          spectool -g jellyfin-ffmpeg.spec
+
+      - name: Build SRPM
+        run: |
+          mock \
+            -r fedora-${{ matrix.fedora_version }}-x86_64-rpmfusion_free \
+            --resultdir results-srpm \
+            --buildsrpm \
+            --sources . \
+            --spec jellyfin-ffmpeg.spec \
+            --no-cleanup-after
+
+      - name: Build RPM
+        run: |
+          mock \
+            -r fedora-${{ matrix.fedora_version }}-x86_64-rpmfusion_free \
+            --resultdir results-rpm \
+            --rebuild results-srpm/*.src.rpm \
+            --no-cleanup-after
+
+      - name: Find built RPM
+        id: find-rpm
+        run: |
+          RPM_FILE=$(find results-rpm -name "jellyfin-ffmpeg-*.rpm" -not -name "*.src.rpm" -not -name "*debuginfo*" -not -name "*debugsource*" | head -n 1)
+          echo "rpm_path=$RPM_FILE" >> $GITHUB_OUTPUT
+
+          # Extract the base RPM name
+          BASE_NAME=$(basename "$RPM_FILE")
+
+          echo "rpm_name=$BASE_NAME" >> $GITHUB_OUTPUT
+
+      - name: Upload RPM to release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ github.event.release.tag_name }} \
+            ${{ steps.find-rpm.outputs.rpm_path }}#${{ steps.find-rpm.outputs.rpm_name }} \
+            --repo ${{ github.repository }} \
+            --clobber
