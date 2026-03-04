@@ -33,7 +33,7 @@ The [`jellyfin-ffmpeg.spec`](./jellyfin-ffmpeg.spec) file can be built like any 
     ```bash
     fedora_ver=$(source /etc/os-release && echo "${VERSION_ID}")
     mock \
-        -r fedora-${fedora_ver}-x86_64-rpmfusion_free \
+        -r fedora+rpmfusion_free-${fedora_ver}-x86_64 \
         --resultdir results-srpm \
         --buildsrpm \
         --sources . \
@@ -44,7 +44,7 @@ The [`jellyfin-ffmpeg.spec`](./jellyfin-ffmpeg.spec) file can be built like any 
 
     ```bash
     mock \
-        -r fedora-${fedora_ver}-x86_64-rpmfusion_free \
+        -r fedora+rpmfusion_free-${fedora_ver}-x86_64 \
         --resultdir results-rpm \
         --rebuild results-srpm/*.src.rpm
     ```
