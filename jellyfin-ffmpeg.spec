@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
 %global ffmpeg_version 7.1.3
 # Jellyfin patchset release
-%global patchset_release 2
+%global patchset_release 4
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
@@ -151,6 +151,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Mon Mar 30 2026 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.1.3-4.1
+- Update to patchset release 4
+
 * Thu Feb 12 2026 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.1.3-2.1
 - Update to patchset release 2
 
