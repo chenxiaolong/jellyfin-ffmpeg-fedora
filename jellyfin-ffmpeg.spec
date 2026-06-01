@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
-%global ffmpeg_version 7.1.4
+%global ffmpeg_version 8.1.1
 # Jellyfin patchset release
-%global patchset_release 3
+%global patchset_release 1
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
@@ -82,6 +82,7 @@ cat debian/patches/*.patch | patch -p1
     --bindir=%{_libexecdir}/%{name} \
     --target-os=linux \
     --extra-version=Jellyfin \
+    --disable-unstable \
     --disable-doc \
     --disable-ffplay \
     --disable-stripping \
@@ -151,6 +152,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Mon Jun 01 2026 Andrew Gunnerson <accounts+fedora@chiller3.com> - 8.1.1-1.1
+- Update to 8.1.1 and patchset release 1
+
 * Sat Jun 06 2026 Andrew Gunnerson <accounts+fedora@chiller3.com> - 7.1.4-3.1
 - Update to patchset release 3
 
