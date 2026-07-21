@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
 %global ffmpeg_version 8.1.2
 # Jellyfin patchset release
-%global patchset_release 1
+%global patchset_release 2
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
@@ -88,8 +88,11 @@ cat debian/patches/*.patch | patch -p1
     --disable-stripping \
     --disable-shared \
     --disable-libxcb \
-    --disable-sdl2 \
+    --disable-libxcb-shm \
+    --disable-libxcb-xfixes \
+    --disable-libxcb-shape \
     --disable-xlib \
+    --disable-sdl2 \
     --enable-lto \
     --enable-gpl \
     --enable-version3 \
@@ -121,6 +124,7 @@ cat debian/patches/*.patch | patch -p1
     --enable-libshaderc \
     --enable-libplacebo \
     --enable-vulkan \
+    --enable-vulkan-static \
     --enable-opencl \
     --enable-vaapi \
     --enable-amf \
@@ -152,6 +156,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Tue Jul 21 2026 Andrew Gunnerson <accounts+fedora@chiller3.com> - 8.1.2-2.1
+- Update to patchset release 2
+
 * Mon Jul 06 2026 Andrew Gunnerson <accounts+fedora@chiller3.com> - 8.1.2-1.1
 - Update to 8.1.2 and patchset release 1
 
