@@ -1,7 +1,7 @@
 # Upstream ffmpeg version
 %global ffmpeg_version 8.1.2
 # Jellyfin patchset release
-%global patchset_release 4
+%global patchset_release 5
 
 Name:           jellyfin-ffmpeg
 Version:        %{ffmpeg_version}
@@ -156,6 +156,9 @@ rm -r %{buildroot}/discard
 
 
 %changelog
+* Tue Sep 15 2026 Andrew Gunnerson <accounts+fedora@chiller3.com> - 8.1.2-5.1
+- Update to patchset release 5
+
 * Sun Sep 06 2026 Andrew Gunnerson <accounts+fedora@chiller3.com> - 8.1.2-4.1
 - Update to patchset release 4
 
